@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+
+  kart-api-spring-java:
+    build: .
+    container_name: kart-api-spring-java
+    ports:
+      - "8081:8080"
+      - "18787:8787"
+    restart: always
+    depends_on:
+      - kart-db
+
+  kart-db:
+    image: postgres:10.7
+    container_name: kart-db
+    environment:
+      - POSTGRES_USER=siva
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=appdb
+    ports:
+      - "5432:5432"
